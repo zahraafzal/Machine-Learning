@@ -212,4 +212,5 @@ else:
 print("\n" + "=" * 60)
 print("TRAINING COMPLETE!")
 print("=" * 60)
+model.save("cars_cnn.keras")
 
