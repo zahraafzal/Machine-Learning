@@ -10,15 +10,17 @@ st.title("Vehicle Classification using CNN")
 st.markdown("Upload a vehicle image to classify it")
 
 # Load model
+import os
+
 @st.cache_resource
 def load_model():
     try:
-        model = tf.keras.models.load_model('/Users/hh/Desktop/linear and logistic/cars_cnn.keras')
+        model_path = os.path.join(os.path.dirname(__file__), "cars_cnn.keras")
+        model = tf.keras.models.load_model(model_path)
         return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
-
 model = load_model()
 
 # Class names
