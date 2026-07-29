@@ -3,7 +3,9 @@ import numpy as np
 from PIL import Image
 
 import os
+os.environ['KERAS_BACKEND'] = 'tensorflow'
 import tensorflow as tf
+import keras
 
 # Page config
 st.set_page_config(page_title="Vehicle Classification", layout="centered")
@@ -16,8 +18,8 @@ st.markdown("Upload a vehicle image to classify it")
 def load_model():
     try:
         model_path = os.path.join(os.path.dirname(__file__), "cars_cnn.keras")
-        # Load with safe_mode=False to handle version differences
-        model = tf.keras.models.load_model(model_path, compile=False, safe_mode=False)
+        # Use Keras 3 to load the model
+        model = keras.models.load_model(model_path, compile=False)
         return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
