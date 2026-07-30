@@ -24,7 +24,7 @@ def load_model():
             st.error(f"Model file not found: {model_path}")
             return None
 
-        model = keras.models.load_model(model_path, compile=False)
+        model = tf.keras.models.load_model(model_path, compile=False, safe_mode=False)
         return model
 
     except Exception as e:
