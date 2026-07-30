@@ -17,18 +17,16 @@ st.markdown("Upload a vehicle image to classify it")
 @st.cache_resource
 def load_model():
     try:
-        # Direct model name (no subdirectories on deployment)
-        model_path = "cars_cnn_compatible.keras"
-        
-        # Check if file exists
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        model_path = os.path.join(BASE_DIR, "cars_cnn_compatible.keras")
+
         if not os.path.exists(model_path):
             st.error(f"Model file not found: {model_path}")
-            st.info("Please ensure 'cars_cnn_compatible.keras' is uploaded to the repository root")
             return None
-        
-        # Use Keras 3 to load the model
+
         model = keras.models.load_model(model_path, compile=False)
         return model
+
     except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
